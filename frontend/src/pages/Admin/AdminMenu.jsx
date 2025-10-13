@@ -12,18 +12,17 @@ const AdminMenu = () => {
   return (
     <>
       <button
-        className={`${
-          isMenuOpen ? "top-2 right-2" : "top-5 right-7"
-        } bg-gray-800 p-2 fixed rounded-lg`}
+        className={`fixed z-50 ${isMenuOpen ? "top-2 right-2" : "top-5 right-7"} w-12 h-12 flex items-center justify-center bg-gray-900 rounded-2xl shadow-lg border-2 border-pink-500 text-white text-3xl focus:outline-none transition hover:bg-pink-600 hover:text-white`}
         onClick={toggleMenu}
+        aria-label="Open admin menu"
       >
         {isMenuOpen ? (
           <FaTimes color="white" />
         ) : (
           <>
-            <div className="w-6 h-0.5 bg-gray-200 my-1"></div>
-            <div className="w-6 h-0.5 bg-gray-200 my-1"></div>
-            <div className="w-6 h-0.5 bg-gray-200 my-1"></div>
+            <div className="w-7 h-1 bg-gray-200 my-1 rounded"></div>
+            <div className="w-7 h-1 bg-gray-200 my-1 rounded"></div>
+            <div className="w-7 h-1 bg-gray-200 my-1 rounded"></div>
           </>
         )}
       </button>

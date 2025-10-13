@@ -225,64 +225,71 @@ const Order = () => {
             </h1>
 
             {/* بطاقة جدول المنتجات */}
-            <div className="bg-gray-900 p-6 rounded-xl shadow-2xl border border-gray-800">
+        <div className="bg-gray-900 p-2 sm:p-6 rounded-xl shadow-2xl border border-gray-800">
                 {order.orderItems.length === 0 ? (
-                    <Message>Order is empty</Message>
+                        <Message>Order is empty</Message>
                 ) : (
-                    <div className="overflow-x-auto">
-                        <table className="w-full border-collapse">
-                            {/* رأس الجدول */}
-                            <thead className="border-b border-pink-600/50">
-                                <tr>
-                                    <th className="p-3 text-left text-sm font-bold uppercase text-pink-500">Image</th>
-                                    <th className="p-3 text-left text-sm font-bold uppercase text-pink-500">Product</th>
-                                    <th className="p-3 text-center text-sm font-bold uppercase text-pink-500">Quantity</th>
-                                    <th className="p-3 text-right text-sm font-bold uppercase text-pink-500">Unit Price</th>
-                                    <th className="p-3 text-right text-sm font-bold uppercase text-pink-500">Total</th>
-                                </tr>
-                            </thead>
-
-                            {/* جسم الجدول */}
-                            <tbody>
+                        <>
+                            {/* للجوال: بطاقات عمودية */}
+                            <div className="block sm:hidden">
                                 {order.orderItems.map((item, index) => (
-                                    <tr 
-                                        key={index}
-                                        className="border-b border-gray-700 last:border-b-0 hover:bg-gray-800 
-                                        transition duration-150"
-                                    >
-                                        <td className="p-3">
-                                            <img
-                                                src={item.image}
-                                                alt={item.name}
-                                                className="w-16 h-16 object-cover rounded-lg"
-                                            />
-                                        </td>
-
-                                        <td className="p-3">
-                                            <Link 
-                                                to={`/product/${item.product}`}
-                                                className="text-white hover:text-pink-400 font-semibold"
-                                            >
+                                    <div key={index} className="flex flex-col gap-2 mb-4 p-2 rounded-lg border border-gray-800 bg-gray-950">
+                                        <div className="flex items-center gap-2 mb-2">
+                                            <img src={item.image} alt={item.name} className="w-12 h-12 object-cover rounded-md" />
+                                            <Link to={`/product/${item.product}`} className="text-white text-sm font-semibold hover:text-pink-400">
                                                 {item.name}
                                             </Link>
-                                        </td>
-
-                                        <td className="p-3 text-center text-white">{item.qty}</td>
-                                        
-                                        <td className="p-3 text-right text-gray-300">
-                                            $ {item.price.toFixed(2)}
-                                        </td>
-                                        
-                                        <td className="p-3 text-right font-bold text-pink-400">
-                                            $ {(item.qty * item.price).toFixed(2)}
-                                        </td>
-                                    </tr>
+                                        </div>
+                                        <div className="flex flex-wrap justify-between text-xs text-gray-300">
+                                            <span>Quantity: <span className="text-white font-bold">{item.qty}</span></span>
+                                            <span>Unit Price: <span className="text-white">$ {item.price.toFixed(2)}</span></span>
+                                            <span>Total: <span className="text-pink-400 font-bold">
+                                                $ {(item.qty * item.price).toFixed(2)}</span></span>
+                                        </div>
+                                    </div>
                                 ))}
-                            </tbody>
-                        </table>
-                    </div>
+                            </div>
+                            {/* للديسكتوب: جدول */}
+                            <div className="hidden sm:block">
+                                <div className="overflow-x-auto">
+                                    <table className="w-full border-collapse">
+                                        <thead className="border-b border-pink-600/50">
+                                            <tr>
+                                                <th className="p-3 text-left text-sm font-bold uppercase text-pink-500">Image</th>
+                                                <th className="p-3 text-left text-sm font-bold uppercase text-pink-500">Product</th>
+                                                <th className="p-3 text-center text-sm font-bold uppercase text-pink-500">Quantity</th>
+                                                <th className="p-3 text-right text-sm font-bold uppercase text-pink-500">Unit Price</th>
+                                                <th className="p-3 text-right text-sm font-bold uppercase text-pink-500">Total</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {order.orderItems.map((item, index) => (
+                                                <tr 
+                                                    key={index}
+                                                    className="border-b border-gray-700 last:border-b-0 hover:bg-gray-800 transition duration-150"
+                                                >
+                                                    <td className="p-3">
+                                                        <img src={item.image} alt={item.name} className="w-16 h-16 object-cover rounded-lg" />
+                                                    </td>
+                                                    <td className="p-3">
+                                                        <Link to={`/product/${item.product}`} className="text-white hover:text-pink-400 
+                                                        font-semibold">
+                                                            {item.name}
+                                                        </Link>
+                                                    </td>
+                                                    <td className="p-3 text-center text-white">{item.qty}</td>
+                                                    <td className="p-3 text-right text-gray-300">$ {item.price.toFixed(2)}</td>
+                                                    <td className="p-3 text-right font-bold text-pink-400">
+                                                        $ {(item.qty * item.price).toFixed(2)}</td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </>
                 )}
-            </div>
+        </div>
             
             {/* حالة التوصيل */}
             <div className="mt-8">
@@ -336,24 +343,19 @@ const Order = () => {
                 </h2>
                 
                 {/* تفاصيل الشحن */}
-                <p className="text-gray-300">
-                    <strong className="text-pink-500">Name:</strong> {order.user.username}
-                </p>
-                <p className="text-gray-300">
-                    <strong className="text-pink-500">Email:</strong> {order.user.email}
-                </p>
-                <p className="text-gray-300">
-                    <strong className="text-pink-500">Address:</strong>
-                     {order.shippingAddress.address},
-                      {order.shippingAddress.city} 
-                      {order.shippingAddress.postalCode},
-                     {order.shippingAddress.country}
-                </p>
+                <div className="flex flex-col gap-1">
+                  <span className="text-gray-300"><strong className="text-pink-500">Name:</strong> {order.user.username}</span>
+                  <span className="text-gray-300"><strong className="text-pink-500">Email:</strong> {order.user.email}</span>
+                  <span className="text-gray-300"><strong className="text-pink-500">Address:</strong>
+                   {order.shippingAddress.address}, 
+                   {order.shippingAddress.city} {order.shippingAddress.postalCode},
+                    {order.shippingAddress.country}</span>
+                </div>
 
                 {/* طريقة الدفع */}
-                <p className="text-gray-300 pt-4 border-t border-gray-700">
-                    <strong className="text-pink-500">Method:</strong> {order.paymentMethod}
-                </p>
+                                <div className="text-gray-300 pt-4 border-t border-gray-700 flex flex-col">
+                                    <span><strong className="text-pink-500">Method:</strong> {order.paymentMethod}</span>
+                                </div>
                 
                 {/* حالة الدفع */}
                 <div className="mt-4">
@@ -396,23 +398,23 @@ const Order = () => {
                     Order Summary
                 </h2>
 
-                <div className="flex justify-between">
+            <div className="flex flex-col gap-2">
+                <div className="flex flex-row justify-between items-center">
                     <span className="text-gray-400">Items:</span>
                     <span className="text-white">$ {order.itemsPrice}</span>
                 </div>
-                <div className="flex justify-between">
+                <div className="flex flex-row justify-between items-center">
                     <span className="text-gray-400">Shipping:</span>
                     <span className="text-white">$ {order.shippingPrice}</span>
                 </div>
-                <div className="flex justify-between">
+                <div className="flex flex-row justify-between items-center">
                     <span className="text-gray-400">Tax:</span>
                     <span className="text-white">$ {order.taxPrice}</span>
                 </div>
-
-                {/* الإجمالي النهائي */}
-                <div className="flex justify-between pt-4 border-t border-gray-700">
+                <div className="flex flex-row justify-between items-center pt-4 border-t border-gray-700">
                     <span className="text-2xl font-extrabold text-white">Total:</span>
                     <span className="text-2xl font-extrabold text-pink-500">$ {order.totalPrice}</span>
+                </div>
                 </div>
             </div>
 

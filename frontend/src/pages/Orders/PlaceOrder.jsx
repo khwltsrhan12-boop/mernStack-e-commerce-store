@@ -88,7 +88,7 @@ const PlaceOrder = () => {
 
                   <td className="p-4">
                     <Link 
-                      to={`/product/${item.product}`} 
+                      to={`/product/${item._id || item.product}`} 
                       className="text-white hover:text-pink-400 font-semibold"
                     >
                       {item.name}
@@ -115,7 +115,7 @@ const PlaceOrder = () => {
       <div className="flex flex-col md:flex-row justify-between p-6 bg-gray-900
        rounded-xl shadow-2xl border border-gray-800 gap-8">
         
-        <div className="w-full md:w-1/3 space-y-3 p-4 border-r md:border-r-pink-600/30">
+  <div className="w-full md:w-1/3 space-y-3 p-4 md:border-r md:border-r-pink-600/30">
             <h3 className="text-xl font-bold text-white mb-2">Billing Details</h3>
             
             <div className="flex justify-between border-b border-gray-700 pb-2">
@@ -136,7 +136,7 @@ const PlaceOrder = () => {
             </div>
         </div>
 
-        <div className="w-full md:w-1/3 space-y-2 p-4 border-r md:border-r-pink-600/30">
+  <div className="w-full md:w-1/3 space-y-2 p-4 md:border-r md:border-r-pink-600/30">
             <h3 className="text-xl font-bold text-white mb-2">Shipping Address</h3>
             <p className="text-gray-300">
               {cart.shippingAddress.address}, {cart.shippingAddress.city}

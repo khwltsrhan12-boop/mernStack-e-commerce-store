@@ -138,7 +138,9 @@ return (
    
   <div className="p-2 md:p-4 min-h-screen"> 
       <div className="flex flex-col md:flex-row md:space-x-8"> 
-        <AdminMenu /> 
+        <div className="mb-16 sm:mb-0">
+        <AdminMenu />
+        </div> 
         <section className="md:w-full">
         <h1 className="text-3xl font-extrabold mb-8 text-white border-b-2 border-pink-600/50 pb-2
          max-w-full md:max-w-6xl mx-auto">

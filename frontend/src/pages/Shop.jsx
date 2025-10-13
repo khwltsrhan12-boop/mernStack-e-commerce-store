@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useGetFilteredProductsQuery } from "../redux/api/productApiSlice";
 import { useFetchCategoriesQuery } from "../redux/api/categoryApiSlice";
+import FilterModal from "../components/FilterModal";
 
 import {
   setCategories,
@@ -11,6 +12,7 @@ import {
 import Loader from "../components/Loader";
 import ProductCard from "./Products/ProductCard";
 
+
 const Shop = () => {
   const dispatch = useDispatch();
   const { categories, products, checked, radio } = useSelector(
@@ -19,6 +21,7 @@ const Shop = () => {
 
   const categoriesQuery = useFetchCategoriesQuery();
   const [priceFilter, setPriceFilter] = useState("");
+    const [showFilters, setShowFilters] = useState(false);
 
   const filteredProductsQuery = useGetFilteredProductsQuery({
     checked,
@@ -83,8 +86,30 @@ const Shop = () => {
   return (
     <>
       <div className="max-w-7xl mx-auto p-4">
+        {/* زر فلترة للجوال فقط */}
+        <div className="block md:hidden mb-4">
+          <button
+            className="bg-pink-600 text-white py-2 px-4 rounded-lg font-bold w-full"
+            onClick={() => setShowFilters(true)}
+          >
+            Filter Products
+          </button>
+        </div>
+        {/* استدعاء FilterModal للجوال فقط */}
+        <FilterModal
+          isOpen={showFilters}
+          onClose={() => setShowFilters(false)}
+          categories={categories}
+          uniqueBrands={uniqueBrands}
+          priceFilter={priceFilter}
+          handleCheck={handleCheck}
+          handleBrandClick={handleBrandClick}
+          handlePriceChange={handlePriceChange}
+          onReset={() => window.location.reload()}
+        />
         <div className="flex flex-col md:flex-row gap-6">
-          <div className="bg-gray-900 p-4 mt-2 mb-2 w-full md:w-1/5 rounded-xl shadow-2xl">
+          {/* الفلاتر للشاشات الاكبر */}
+          <div className="hidden md:block bg-gray-900 p-4 mt-2 mb-2 w-full md:w-1/5 rounded-xl shadow-2xl">
             <h2 className="h4 text-center py-3 text-white font-bold tracking-wider 
                    bg-gray-800/50 rounded-lg mb-4 border-b border-pink-600/50">
               Filter by Categories

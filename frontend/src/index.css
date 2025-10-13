@@ -1,3 +1,49 @@
+@media (max-width: 640px) {
+  /* إخفاء عمود User ID للجوال فقط */
+  .user-id-col {
+    display: none !important;
+  }
+  /* تحسين العنوان والتوتال للجوال */
+  .user-list-section {
+    padding: 0.5rem !important;
+  }
+  .user-list-section h1 {
+    font-size: 1.2rem !important;
+    margin-bottom: 0.5rem !important;
+    text-align: center !important;
+  }
+  .user-list-section p {
+    font-size: 0.9rem !important;
+    text-align: center !important;
+    margin-bottom: 0.5rem !important;
+  }
+  .user-list-section .flex.items-center.gap-4 {
+    flex-direction: column !important;
+    gap: 0.3rem !important;
+    align-items: center !important;
+    margin-bottom: 0.5rem !important;
+  }
+  .user-list-section .bg-gray-800 {
+    width: 100% !important;
+    margin-bottom: 0.3rem !important;
+    text-align: center !important;
+  }
+  .user-list-section table {
+    font-size: 0.85rem !important;
+    min-width: 600px !important;
+    /* يسمح بالتمرير الأفقي */
+    display: block !important;
+    overflow-x: auto !important;
+  }
+  .user-list-section th, .user-list-section td {
+    padding: 0.4rem !important;
+    font-size: 0.8rem !important;
+  }
+  .user-list-section .rounded-xl {
+    border-radius: 0.5rem !important;
+    padding: 0.5rem !important;
+  }
+}
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

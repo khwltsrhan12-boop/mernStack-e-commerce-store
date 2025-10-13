@@ -58,7 +58,7 @@ const UserList = () => {
   };
 
   return (
-    <div className="p-2 md:p-4 min-h-screen">
+  <div className="p-2 md:p-4 min-h-screen user-list-section">
       {isLoading ? (
         <Loader />
       ) : error ? (
@@ -68,7 +68,9 @@ const UserList = () => {
       ) : (
        
     <div className="flex flex-col md:flex-row md:space-x-8">
-         <AdminMenu />
+        <div className="mb-20 sm:mb-0">
+        <AdminMenu />
+        </div>
       <div className="md:w-full overflow-x-auto"> 
         <div className="w-full max-w-full md:max-w-4xl mx-auto mb-6">
           <div className="flex items-center justify-between">
@@ -96,7 +98,7 @@ const UserList = () => {
         <table className="w-full border-collapse">
           <thead className="bg-gray-800/70">
             <tr>
-              <th className="px-4 py-4 text-left text-xs font-bold uppercase text-pink-400 tracking-wider w-20">
+              <th className="px-4 py-4 text-left text-xs font-bold uppercase text-pink-400 tracking-wider w-20 user-id-col">
                 🆔 User ID
               </th>
               <th className="px-4 py-4 text-left text-xs font-bold uppercase text-pink-400 tracking-wider w-40">
@@ -121,7 +123,7 @@ const UserList = () => {
                  transition-all duration-200 text-white group border-l-4 border-l-transparent 
                  hover:border-l-pink-500"
               >
-              <td className="px-4 py-4 whitespace-nowrap">
+              <td className="px-4 py-4 whitespace-nowrap user-id-col">
                 <div className="flex items-center">
                   <div className="w-8 h-8 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full
                    flex items-center justify-center text-white text-sm font-bold mr-3">

@@ -41,7 +41,9 @@ const OrderList = () => {
         </Message>
       ) : (
     <div className="flex flex-col md:flex-row md:space-x-8"> 
-     <AdminMenu />
+     <div className="mb-20 sm:mb-0">
+        <AdminMenu />
+      </div>
       <div className="md:w-full overflow-x-auto"> 
          <h1 className="text-3xl font-extrabold mb-6 text-white
           border-b-2 border-pink-600/50 pb-2 

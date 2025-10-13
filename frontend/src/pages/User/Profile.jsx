@@ -43,7 +43,7 @@ const Profile = () => {
 
 return (
     <div className="flex justify-center items-start py-10 pt-16 bg-[#0D1117] min-h-screen">
-      <div className="w-full max-w-lg bg-gray-900 p-8 rounded-xl shadow-2xl border border-gray-800">
+  <div className="w-full max-w-lg bg-gray-900 p-8 rounded-xl shadow-2xl border border-gray-800 mx-4 sm:mx-0">
 
         {/* العنوان */}
         <h2 className="text-3xl font-extrabold text-white text-center mb-8 flex items-center

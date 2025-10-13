@@ -100,17 +100,17 @@ const ProductCarousel = () => {
                 <img
                   src={image}
                   alt={name}
-                  className="w-full rounded-t-xl object-cover h-[28rem] transition
-                   duration-300 hover:opacity-90"
+                  className="w-full rounded-t-xl object-cover h-56 sm:h-72 md:h-96 xl:h-[28rem] 
+                  transition duration-300 hover:opacity-90"
                 />
 
                 <div className="p-6 text-white">
                   <div className="flex justify-between items-start mb-4 ">
-                    <h2  className="text-3xl font-extrabold text-pink-400">
+                    <h2  className="text-xl sm:text-2xl md:text-3xl font-extrabold text-pink-400">
                       {name}
                     </h2>
 
-                    <p className="text-3xl font-extrabold text-white bg-pink-600 
+                    <p className="text-lg sm:text-xl md:text-3xl font-extrabold text-white bg-pink-600 
                         px-4 py-1 rounded-full shadow-lg">
                       $ {price}
                     </p> 

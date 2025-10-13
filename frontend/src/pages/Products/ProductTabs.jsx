@@ -29,9 +29,9 @@ const ProductTabs = ({
 
   return (
     <div className="flex flex-col md:flex-row">
-      <section className="flex flex-col items-start gap-4 w-[15rem] mr-8">
+  <section className="flex flex-col items-start gap-2 w-full sm:gap-4 sm:w-[15rem] sm:mr-8 mb-4 sm:mb-0">
         {/* التاب 1: Review Form */}
-        <div className={`p-3 cursor-pointer text-lg rounded-lg transition-colors 
+        <div className={`p-2 sm:p-3 cursor-pointer text-base sm:text-lg rounded-lg transition-colors 
           duration-200 w-full text-center 
           ${activeTab === 1
           ? "bg-pink-600 text-white font-semibold" 
@@ -43,7 +43,7 @@ const ProductTabs = ({
         </div>
         
         {/* التاب 2: All Reviews */}
-        <div className={`p-3 cursor-pointer text-lg rounded-lg 
+        <div className={`p-2 sm:p-3 cursor-pointer text-base sm:text-lg rounded-lg 
             transition-colors duration-200 w-full text-center 
             ${activeTab === 2
           ? "bg-pink-600 text-white font-semibold"
@@ -55,7 +55,7 @@ const ProductTabs = ({
         </div>
         
         {/* التاب 3: Related Products */}
-        <div className={`p-3 cursor-pointer text-lg rounded-lg 
+        <div className={`p-2 sm:p-3 cursor-pointer text-base sm:text-lg rounded-lg 
           transition-colors duration-200 w-full text-center 
             ${activeTab === 3
             ? "bg-pink-600 text-white font-semibold"
@@ -72,7 +72,7 @@ const ProductTabs = ({
         
         {/* محتوى التاب 1: Write Your Review */}
         {activeTab === 1 && (
-          <div className="xl:w-[50rem]"> {/* العرض الموحد والمحاذاة */}
+          <div className="xl:w-[50rem]"> 
             <h2 className="text-2xl font-bold mb-4 text-white border-b 
             border-pink-500/50 pb-2">
               Write Your Review
@@ -132,7 +132,7 @@ const ProductTabs = ({
 
         {/* محتوى التاب 2: All Reviews */}
         {activeTab === 2 && (
-          <div className="xl:w-[50rem]"> {/* العرض الموحد والمحاذاة */}
+          <div className="xl:w-[50rem]">
             <div>{product.reviews.length === 0 && <p>No Reviews</p>}</div>
 
             <div>
@@ -148,7 +148,7 @@ const ProductTabs = ({
                       {review.createdAt.substring(0, 10)}
                     </p>
                   </div>
-                  <p className="my-4 text-gray-200">{review.comment}</p> {/* تم تصحيح لون النص */}
+                  <p className="my-4 text-gray-200">{review.comment}</p> 
                   <Ratings value={review.rating} />
                 </div>
               ))}
@@ -158,7 +158,7 @@ const ProductTabs = ({
 
         {/* محتوى التاب 3: Related Products */}
         {activeTab === 3 && (
-          <div className="xl:w-[50rem]"> {/* العرض الموحد والمحاذاة */}
+          <div className="xl:w-[50rem]"> 
             <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
               {!data ? (
                 <Loader />

@@ -71,7 +71,9 @@ const ProductList = () => {
   <div className="p-2 md:p-4 min-h-screen">
 
    <div className="flex flex-col md:flex-row md:space-x-8">
-        <AdminMenu />
+        <div className="mb-16 sm:mb-0">
+          <AdminMenu />
+        </div>
     <div className="md:w-full overflow-x-auto">
 
     <div className="max-w-full md:max-w-6xl mx-auto 
