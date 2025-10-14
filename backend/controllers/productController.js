@@ -70,12 +70,11 @@ const removeProduct = asyncHandler(async(req,res) =>{
 const fetchProducts = asyncHandler(async(req,res) =>{
   try {
     const pageSize = 6;
-    const keyWord = req.query.keyWord ? {name :{$regx:req.query.keyWord,
-      $options:'i'}}:{};
-    const count = await Product.countDocuments({...keyWord})
-    const products = await Product.find({...keyWord}).limit(pageSize)
+    const keyWord = req.query.keyWord ? { name: { $regex: req.query.keyWord, $options: 'i' } } : {};
+    const count = await Product.countDocuments({ ...keyWord });
+    const products = await Product.find({ ...keyWord }).limit(pageSize);
 
-    res.json({products ,page:1 ,pages:Math.ceil(count/pageSize) ,hasMore:false});
+    res.json({ products, page: 1, pages: Math.ceil(count / pageSize), hasMore: false });
 
   } catch (error) {
       console.error(error)
@@ -152,11 +151,13 @@ const addProductReview = asyncHandler(async(req,res) =>{
 
 const fetchTopProducts = asyncHandler(async(req,res) =>{
   try {
-    const products =await Product.find({}).sort({rating: -1}).limit(4)
-    res.json(products)
+    console.log("Request to /api/products/top received");
+    const products = await Product.find({}).sort({rating: -1}).limit(4);
+    console.log("Top products fetched:", products);
+    res.json(products);
   } catch (error) {
-     console.error(error)
-    res.status(400).json(error.message)
+    console.error("Error in /api/products/top:", error);
+    res.status(400).json({ message: error.message });
   }
 });
 
