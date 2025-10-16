@@ -32,135 +32,100 @@ const OrderList = () => {
 
   return (
     <>
-    <div className="p-2 md:p-4 min-h-screen">
-      {isLoading ? (
-        <Loader />
-      ) : error ? (
-        <Message variant="danger">
-          {error?.data?.message || error.error}
-        </Message>
-      ) : (
-    <div className="flex flex-col md:flex-row md:space-x-8"> 
-     <div className="mb-20 sm:mb-0">
-        <AdminMenu />
+      <div className="p-2 md:p-4 min-h-screen">
+        {isLoading ? (
+          <Loader />
+        ) : error ? (
+          <Message variant="danger">
+            {error?.data?.message || error.error}
+          </Message>
+        ) : (
+          <div className="flex flex-col md:flex-row md:space-x-8">
+            <div className="mb-8 sm:mb-0">
+              <AdminMenu />
+            </div>
+            <div className="md:w-full">
+              <h1 className="text-3xl font-extrabold mb-6 text-white border-b-2 border-pink-600/50 pb-2
+               w-full max-w-full md:max-w-6xl mx-auto">
+                Manage Orders
+              </h1>
+            
+              <div className="max-w-full md:max-w-6xl mx-auto bg-gray-900 p-2 md:p-4 rounded-xl
+               shadow-2xl border border-gray-800 overflow-x-auto">
+                <table className="min-w-[600px] w-full border-collapse bg-transparent">
+                  <thead className="border-b border-pink-600/50">
+                    <tr className="text-white">
+                      <th className="px-3 py-3 text-center text-sm font-bold uppercase text-pink-500 w-16">ITEMS</th>
+                      <th className="px-3 py-3 text-center text-sm font-bold uppercase text-pink-500 w-32 hidden md:table-cell">ID</th>
+                      <th className="px-3 py-3 text-center text-sm font-bold uppercase text-pink-500 w-24">USER</th>
+                      <th className="px-3 py-3 text-center text-sm font-bold uppercase text-pink-500 w-24">DATE</th>
+                      <th className="px-3 py-3 text-center text-sm font-bold uppercase text-pink-500 w-20">TOTAL</th>
+                      <th className="px-3 py-3 text-center text-sm font-bold uppercase text-pink-500 w-24">STATUS</th>
+                      <th className="px-3 py-3 text-center text-sm font-bold uppercase text-pink-500 w-32">ACTIONS</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {orders.map((order) => (
+                      <tr key={order._id} className="border-b border-gray-700 hover:bg-gray-800 transition
+                       duration-150 text-white text-center">
+                        <td className="p-3 flex justify-center">
+                          <img src={order.orderItems[0].image} alt={order._id} className="w-12 h-12 object-cover rounded-md" />
+                        </td>
+                        <td className="p-3 text-gray-400 text-sm font-mono hidden md:table-cell">
+                          {order._id.substring(0, 10)}...</td>
+                        <td className="p-3 font-semibold text-white">{order.user ? order.user.username : "N/A"}</td>
+                        <td className="p-3 text-gray-300 text-sm text-center whitespace-nowrap">
+                          {order.createdAt 
+                          ? `${new Date(order.createdAt).getDate()} ${new Date(order.createdAt).toLocaleString('en-GB',
+                           { month: 'short' })} ${new Date(order.createdAt).getFullYear()}`
+                          : "N/A"}</td>
+                        <td className="p-3 font-bold text-pink-400 text-center">${Number(order.totalPrice).toFixed(2)}</td>
+                        <td className="p-3 text-center">
+                          <div className="flex flex-col gap-2 items-center">
+                            <span className={`inline-block py-2 px-4 text-base font-semibold rounded-full
+                               ${order.isPaid 
+                               ? 'bg-green-600 text-white' 
+                               : 'bg-red-600 text-white'}`}>
+                                {order.isPaid ? 'Paid' : 'Pending'}</span>
+                            <span className={`inline-block py-2 px-4 text-base font-semibold rounded-full 
+                              ${order.isDelivered 
+                              ? 'bg-blue-600 text-white' 
+                              : 'bg-orange-600 text-white'}`}>
+                                {order.isDelivered ? 'Delivered' : 'Shipping'}</span>
+                          </div>
+                        </td>
+                        <td className="p-3 text-center">
+                          <div className="flex flex-col gap-2">
+                            <div className="flex flex-col gap-2 items-center w-full">
+                              <Link to={`/order/${order._id}`} className="w-full">
+                                <button className="bg-pink-600 text-white px-4 py-2 rounded-lg text-base font-semibold
+                                 hover:bg-pink-700 transition duration-150 w-full">Details</button>
+                              </Link>
+                              {(!order.isPaid || !order.isDelivered) && (
+                                <button
+                                  onClick={() => handleMockPaymentAndDelivery(order._id)}
+                                  disabled={isMockLoading}
+                                  className={`px-4 py-2 rounded-lg text-base font-semibold transition duration-150 w-full
+                                     ${isMockLoading 
+                                      ? 'bg-gray-500 cursor-not-allowed text-white' 
+                                      : 'bg-green-600 hover:bg-green-700 text-white'}`}
+                                >
+                                  {isMockLoading ? 'Processing...' : 'Mark Complete'}
+                                </button>
+                              )}
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
-      <div className="md:w-full overflow-x-auto"> 
-         <h1 className="text-3xl font-extrabold mb-6 text-white
-          border-b-2 border-pink-600/50 pb-2 
-         w-full max-w-full md:max-w-6xl mx-auto"> 
-             Manage Orders 
-          </h1>
-         <div className="max-w-full md:max-w-6xl mx-auto 
-         bg-gray-900 p-2 md:p-4 rounded-xl shadow-2xl border border-gray-800"
-          >
-        <table className="w-full border-collapse">
-         
-
-          <thead className="border-b border-pink-600/50">
-            <tr className="text-white">
-              <th className="px-3 py-3 text-left text-sm font-bold uppercase text-pink-500 w-16">ITEMS</th>
-              <th className="px-3 py-3 text-left text-sm font-bold uppercase text-pink-500 w-32">ID</th>
-              <th className="px-3 py-3 text-left text-sm font-bold uppercase text-pink-500 w-24">USER</th>
-              <th className="px-3 py-3 text-left text-sm font-bold uppercase text-pink-500 w-24">DATE</th>
-              <th className="px-3 py-3 text-left text-sm font-bold uppercase text-pink-500 w-20">TOTAL</th>
-              <th className="px-3 py-3 text-center text-sm font-bold uppercase text-pink-500 w-24">STATUS</th>
-              <th className="px-3 py-3 text-center text-sm font-bold uppercase text-pink-500 w-32">ACTIONS</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            {orders.map((order) => (
-              <tr key={order._id}
-               className="border-b border-gray-700 hover:bg-gray-800 transition duration-150 text-white">
-                
-                {/* صورة المنتج */}
-                <td className="p-3">
-                  <img
-                    src={order.orderItems[0].image}
-                    alt={order._id}
-                    className="w-12 h-12 object-cover rounded-md"
-                  />
-                </td>
-
-                {/* معرف الطلب */}
-                <td className="p-3 text-gray-400 text-sm font-mono">
-                  {order._id.substring(0, 10)}...
-                </td>
-
-                {/* اسم المستخدم */}
-                <td className="p-3 font-semibold text-white">
-                  {order.user ? order.user.username : "N/A"}
-                </td>
-
-                {/* التاريخ */}
-                <td className="p-3 text-gray-300 text-sm">
-                  {order.createdAt ? new Date(order.createdAt).toLocaleDateString('en-CA') : "N/A"}
-                </td>
-
-                {/* المبلغ الإجمالي */}
-                <td className="p-3 font-bold text-pink-400">
-                  $ {order.totalPrice}
-                </td>
-                {/* الحالة */}
-                <td className="p-3 text-center">
-                  <div className="flex flex-col gap-1">
-                    {/* حالة الدفع */}
-                    <span className={`inline-block py-1 px-2 text-xs font-semibold rounded-full ${
-                      order.isPaid 
-                        ? 'bg-green-600 text-white' 
-                        : 'bg-red-600 text-white'
-                    }`}>
-                      {order.isPaid ? 'Paid' : 'Pending'}
-                    </span>
-                    
-                    {/* حالة التسليم */}
-                    <span className={`inline-block py-1 px-2 text-xs font-semibold rounded-full ${
-                      order.isDelivered 
-                        ? 'bg-blue-600 text-white' 
-                        : 'bg-orange-600 text-white'
-                    }`}>
-                      {order.isDelivered ? 'Delivered' : 'Shipping'}
-                    </span>
-                  </div>
-                </td>
-
-                {/* الإجراءات */}
-                <td className="p-3 text-center">
-                  <div className="flex flex-col gap-2">
-                    {/* زر التفاصيل */}
-                    <Link to={`/order/${order._id}`}>
-                      <button className="bg-pink-600 text-white px-3 py-1 rounded-lg 
-                        hover:bg-pink-700 transition duration-150 text-xs w-full">
-                        Details
-                      </button>
-                    </Link>
-                    
-                    {/* زر تحديث الحالة */}
-                    {(!order.isPaid || !order.isDelivered) && (
-                      <button 
-                        onClick={() => handleMockPaymentAndDelivery(order._id)}
-                        disabled={isMockLoading}
-                        className={`px-3 py-1 rounded-lg text-xs transition duration-150 w-full ${
-                          isMockLoading 
-                            ? 'bg-gray-500 cursor-not-allowed text-white' 
-                            : 'bg-green-600 hover:bg-green-700 text-white'
-                        }`}
-                      >
-                        {isMockLoading ? 'Processing...' : 'Mark Complete'}
-                      </button>
-                    )}
-                  </div>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        </div>
-      </div>
-  </div>
-  )}
-</div>
-   </>
+    </>
   );
 };
 

@@ -20,10 +20,10 @@ const NextArrow = (props) => {
   const {className,style, onClick } = props;
   return (
     <div
-      className={`${className} slick-arrow !flex items-center justify-center
-       !w-12 !h-12 !bg-pink-600 
+      className={`${className} slick-arrow !flex items-center justify-center !w-12 !h-12 !bg-pink-600 
         hover:!bg-pink-700 rounded-full transition-all duration-300 
-        z-20 cursor-pointer !top-[14rem] !right-[10px] transform -translate-y-1/2`}
+        z-20 cursor-pointer !right-[10px] transform -translate-y-1/2
+        !top-[8rem] sm:!top-[14rem]`}
       style={{ 
         display: "flex", 
          ...style
@@ -39,9 +39,10 @@ const PrevArrow = (props) => {
   const {className, style, onClick } = props;
   return (
     <div
-    className={`${className} slick-arrow !flex items-center justify-center !w-12 !h-12 !bg-pink-600 
-    hover:!bg-pink-700 rounded-full transition-all duration-300 
-    z-20 cursor-pointer !top-[14rem] !left-[10px] transform -translate-y-1/2`}
+  className={`${className} slick-arrow !flex items-center justify-center !w-12 !h-12 !bg-pink-600 
+  hover:!bg-pink-700 rounded-full transition-all duration-300 
+  z-20 cursor-pointer !left-[10px] transform -translate-y-1/2
+  !top-[8rem] sm:!top-[14rem]`}
       style={{ 
          display: "flex",
           ...style
@@ -110,10 +111,12 @@ const ProductCarousel = () => {
                       {name}
                     </h2>
 
-                    <p className="text-lg sm:text-xl md:text-3xl font-extrabold text-white bg-pink-600 
-                        px-4 py-1 rounded-full shadow-lg">
-                      $ {price}
-                    </p> 
+                    <div className="flex items-center justify-center gap-1 bg-pink-600 text-white 
+                    font-extrabold text-lg sm:text-xl md:text-3xl rounded-full shadow-lg px-4 
+                    py-1 min-w-[64px] min-h-[44px]">
+                      <span>$</span>
+                      <span>{price}</span>
+                    </div>
                   </div>
 
                     <p className="text-gray-400 mb-6 w-full">
@@ -121,8 +124,8 @@ const ProductCarousel = () => {
                     </p>
                   </div>
 
-                  <div className="flex justify-between flex-wrap text-gray-300 
-                        border-t border-gray-800 pt-4">
+      <div className="flex flex-col sm:flex-row justify-between flex-wrap text-gray-300 
+        border-t border-gray-800 pt-4 gap-4 sm:gap-x-12 px-4 pb-4">
 
                     <div className="space-y-4">
                        <h1 className="flex items-center text-lg ">

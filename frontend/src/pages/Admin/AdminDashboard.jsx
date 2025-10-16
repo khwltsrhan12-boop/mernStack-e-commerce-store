@@ -137,7 +137,7 @@ return (
    
   <div className="p-2 md:p-4 min-h-screen"> 
       <div className="flex flex-col md:flex-row md:space-x-8"> 
-        <div className="mb-16 sm:mb-0">
+        <div className="mb-8 sm:mb-0">
         <AdminMenu />
         </div> 
         <section className="md:w-full">

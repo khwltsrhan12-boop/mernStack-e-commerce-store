@@ -17,7 +17,7 @@ const port = process.env.PORT || 5000;
 
 connectDB();
 const app = express();
-const allowedOrigins = ['https://mernstack-e-commerce-store.pages.dev', 'http://localhost:3000']; 
+const allowedOrigins = ['https://mernstack-e-commerce-store.pages.dev', 'http://localhost:3000', 'http://localhost:5173']; 
 const corsOptions = {
   origin: function (origin, callback) {
     if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
@@ -45,8 +45,9 @@ app.get("/api/config/paypal", (req, res) => {
   res.send({ clientId: process.env.PAYPAL_CLIENT_ID });
 });
 
-//const __dirname = path.resolve();
-//app.use('/uploads' ,express.static(path.join(__dirname + '/uploads')));
+
+// const __dirname = path.resolve();
+// app.use('/uploads', express.static(path.join(__dirname, '/uploads'))); // تم التعليق: التخزين المحلي للصور
 
 
 app.listen(port , () => console.log(`Server running on port: ${port}`));

@@ -203,16 +203,22 @@ const markOrderAsDelivered = async (req, res) => {
   try {
     const order = await Order.findById(req.params.id);
 
-    if (order) {
-      order.isDelivered = true;
-      order.deliveredAt = Date.now();
-
-      const updatedOrder = await order.save();
-      res.json(updatedOrder);
-    } else {
+    if (!order) {
       res.status(404);
       throw new Error("Order not found");
     }
+
+    // تحقق من حالة الدفع قبل التسليم
+    if (!order.isPaid) {
+      res.status(400);
+      throw new Error("Cannot mark as delivered: Order is not paid");
+    }
+
+    order.isDelivered = true;
+    order.deliveredAt = Date.now();
+
+    const updatedOrder = await order.save();
+    res.json(updatedOrder);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

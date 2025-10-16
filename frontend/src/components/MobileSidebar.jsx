@@ -103,8 +103,8 @@ const MobileSidebar = () => {
                     <span className="ml-4 whitespace-nowrap">{userInfo.username}</span>
                   </button>
                   {dropdownOpen && (
-                    <div className="absolute left-0 mt-2 w-64 bg-gray-800 text-white p-3 rounded-xl 
-                    shadow-xl z-50 flex flex-col space-y-2">
+                    <div className="mt-2 w-64 bg-gray-800 text-white p-3 rounded-xl 
+                    shadow-xl z-50 flex flex-col space-y-2 max-h-96 overflow-y-auto">
                       {/* روابط الأدمن */}
                       {userInfo.isAdmin && (
                         <>

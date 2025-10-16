@@ -115,11 +115,11 @@ return (
             </div>
             
             {/* أزرار الإجراءات */}
-            <div className="flex justify-between pt-4">
+            <div className="flex flex-col sm:flex-row justify-between pt-4 gap-y-3 sm:gap-y-0 sm:gap-x-4">
               <button 
                 type="submit" 
-                className="flex items-center bg-pink-600 text-white px-6 py-3 rounded-lg font-bold 
-                         hover:bg-pink-700 transition duration-200 shadow-md"
+                className="flex items-center justify-center text-center bg-pink-600 text-white px-6 py-3 rounded-lg font-bold 
+                         hover:bg-pink-700 transition duration-200 shadow-md w-full sm:w-auto"
               >
                 <FaSave className="mr-2" />
                 Update
@@ -127,8 +127,8 @@ return (
               
               <Link 
                 to='/user-orders' 
-                className="flex items-center bg-gray-700 text-white px-6 py-3 rounded-lg font-bold 
-                           hover:bg-gray-600 transition duration-200 shadow-md"
+                className="flex items-center justify-center text-center bg-gray-700 text-white px-6 py-3 rounded-lg font-bold 
+                           hover:bg-gray-600 transition duration-200 shadow-md w-full sm:w-auto"
               >
                 <FaListAlt className="mr-2" />
                 My Orders

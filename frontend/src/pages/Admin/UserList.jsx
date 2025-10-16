@@ -68,7 +68,7 @@ const UserList = () => {
       ) : (
        
     <div className="flex flex-col md:flex-row md:space-x-8">
-        <div className="mb-20 sm:mb-0">
+        <div className="mb-8 sm:mb-0">
         <AdminMenu />
         </div>
       <div className="md:w-full overflow-x-auto"> 
@@ -93,9 +93,9 @@ const UserList = () => {
           </div>
           <div className="mt-4 h-0.5 bg-gradient-to-r from-pink-600 to-purple-600"></div>
         </div>
-       <div className="max-w-full md:max-w-4xl mx-auto 
-         bg-gray-900 p-2 md:p-4 rounded-xl shadow-2xl border border-gray-800">
-        <table className="w-full border-collapse">
+       <div className="max-w-full md:max-w-4xl mx-auto bg-gray-900 p-2 md:p-4 rounded-xl shadow-2xl 
+       border border-gray-800 overflow-x-auto">
+        <table className="w-full min-w-[650px] border-collapse">
           <thead className="bg-gray-800/70">
             <tr>
               <th className="px-4 py-4 text-left text-xs font-bold uppercase text-pink-400 tracking-wider w-20 user-id-col">

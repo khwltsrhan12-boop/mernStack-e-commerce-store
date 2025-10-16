@@ -81,9 +81,13 @@ const Navigation = () => {
   const favoriteLink = { to: "/favorite", icon: FaHeart, name: "Favorites" };
 
   if (isMobile) {
-    return <MobileSidebar />;
+    return(
+      <div className="mb-16 sm:mb-0">
+         <MobileSidebar />
+      </div>
+    );  
   }
-  // ...existing code for sidebar navigation (الديسكتوب)
+ 
   return (
     <div
       style={{ zIndex: 9999 }}

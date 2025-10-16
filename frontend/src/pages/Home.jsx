@@ -16,7 +16,7 @@ const Home = () => {
         <Loader />
       ) : isError ? (
         <Message variant="danger">
-          {isError?.data.message || isError.error}
+          {isError?.data?.message || isError?.message || "حدث خطأ"}
         </Message>
       ) : (
         <div className="min-h-screen p-2 sm:p-4 md:p-8">
