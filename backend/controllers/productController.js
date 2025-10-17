@@ -150,10 +150,8 @@ const addProductReview = asyncHandler(async(req,res) =>{
 });
 
 const fetchTopProducts = asyncHandler(async(req,res) =>{
-  try {
-    console.log("Request to /api/products/top received");
+  try { 
     const products = await Product.find({}).sort({rating: -1}).limit(4);
-    console.log("Top products fetched:", products);
     res.json(products);
   } catch (error) {
     console.error("Error in /api/products/top:", error);

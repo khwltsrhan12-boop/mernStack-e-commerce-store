@@ -53,6 +53,7 @@ const createOrder = async (req, res) => {
         ...itemFromClient,
         product: itemFromClient._id,
         price: matchingItemFromDB.price,
+         image: matchingItemFromDB.image,
         _id: undefined,
       };
     });
