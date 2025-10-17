@@ -1,3 +1,8 @@
+// دالة لمعالجة مسار الصورة
+export function getProductImageSrc(image) {
+  if (!image) return '/no-image.png';
+  return image.startsWith('http') ? image : `/uploads/${image}`;
+}
 import Message from "../../components/Message";
 import Loader from "../../components/Loader";
 import { Link } from "react-router-dom";
@@ -41,7 +46,7 @@ const OrderList = () => {
           </Message>
         ) : (
           <div className="flex flex-col md:flex-row md:space-x-8">
-            <div className="mb-8 sm:mb-0">
+            <div className="mb-4 sm:mb-0">
               <AdminMenu />
             </div>
             <div className="md:w-full">
@@ -69,7 +74,8 @@ const OrderList = () => {
                       <tr key={order._id} className="border-b border-gray-700 hover:bg-gray-800 transition
                        duration-150 text-white text-center">
                         <td className="p-3 flex justify-center">
-                          <img src={order.orderItems[0].image} alt={order._id} className="w-12 h-12 object-cover rounded-md" />
+                          <img src={getProductImageSrc(order.orderItems[0]?.image)} alt={order._id}
+                           className="w-12 h-12 object-cover rounded-md" />
                         </td>
                         <td className="p-3 text-gray-400 text-sm font-mono hidden md:table-cell">
                           {order._id.substring(0, 10)}...</td>
@@ -80,40 +86,44 @@ const OrderList = () => {
                            { month: 'short' })} ${new Date(order.createdAt).getFullYear()}`
                           : "N/A"}</td>
                         <td className="p-3 font-bold text-pink-400 text-center">${Number(order.totalPrice).toFixed(2)}</td>
-                        <td className="p-3 text-center">
-                          <div className="flex flex-col gap-2 items-center">
-                            <span className={`inline-block py-2 px-4 text-base font-semibold rounded-full
-                               ${order.isPaid 
-                               ? 'bg-green-600 text-white' 
-                               : 'bg-red-600 text-white'}`}>
-                                {order.isPaid ? 'Paid' : 'Pending'}</span>
-                            <span className={`inline-block py-2 px-4 text-base font-semibold rounded-full 
+                        <td className="p-3 text-center align-middle">
+                          <div className="flex flex-col gap-2 items-center w-full">
+                            <span className={`w-full h-10 flex items-center justify-center text-sm 
+                            md:text-base font-semibold rounded-lg
+                              ${order.isPaid 
+                                ? 'bg-green-600 text-white' 
+                                : 'bg-red-600 text-white'}`}>
+                              {order.isPaid ? 'Paid' : 'Pending'}
+                            </span>
+                            <span className={`w-full h-10 flex items-center justify-center text-sm 
+                            md:text-base font-semibold rounded-lg
                               ${order.isDelivered 
-                              ? 'bg-blue-600 text-white' 
-                              : 'bg-orange-600 text-white'}`}>
-                                {order.isDelivered ? 'Delivered' : 'Shipping'}</span>
+                                ? 'bg-blue-600 text-white' 
+                                : 'bg-orange-600 text-white'}`}>
+                              {order.isDelivered ? 'Delivered' : 'Shipping'}
+                            </span>
                           </div>
                         </td>
-                        <td className="p-3 text-center">
-                          <div className="flex flex-col gap-2">
-                            <div className="flex flex-col gap-2 items-center w-full">
-                              <Link to={`/order/${order._id}`} className="w-full">
-                                <button className="bg-pink-600 text-white px-4 py-2 rounded-lg text-base font-semibold
-                                 hover:bg-pink-700 transition duration-150 w-full">Details</button>
-                              </Link>
-                              {(!order.isPaid || !order.isDelivered) && (
-                                <button
-                                  onClick={() => handleMockPaymentAndDelivery(order._id)}
-                                  disabled={isMockLoading}
-                                  className={`px-4 py-2 rounded-lg text-base font-semibold transition duration-150 w-full
-                                     ${isMockLoading 
-                                      ? 'bg-gray-500 cursor-not-allowed text-white' 
-                                      : 'bg-green-600 hover:bg-green-700 text-white'}`}
-                                >
-                                  {isMockLoading ? 'Processing...' : 'Mark Complete'}
-                                </button>
-                              )}
-                            </div>
+                        <td className="p-3 text-center align-middle">
+                          <div className="flex flex-col gap-2 items-center w-full">
+                            <Link to={`/order/${order._id}`} className="w-full">
+                              <button className="bg-pink-600 text-white w-full h-10 rounded-lg 
+                              text-sm md:text-base font-semibold hover:bg-pink-700 transition 
+                              duration-150 flex items-center justify-center p-0">Details</button>
+                            </Link>
+                            {(!order.isPaid || !order.isDelivered) && (
+                              <button
+                                onClick={() => handleMockPaymentAndDelivery(order._id)}
+                                disabled={isMockLoading}
+                                className={`w-full h-10 rounded-lg text-sm md:text-base font-semibold 
+                                  flex items-center justify-center transition duration-150 p-0
+                                  ${isMockLoading 
+                                    ? 'bg-gray-500 cursor-not-allowed text-white' 
+                                    : 'bg-green-600 hover:bg-green-700 text-white'}`}
+                              >
+                                {isMockLoading ? 'Processing...' : 'Mark Complete'}
+                              </button>
+                            )}
                           </div>
                         </td>
                       </tr>

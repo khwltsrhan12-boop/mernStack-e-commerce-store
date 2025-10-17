@@ -49,8 +49,8 @@ const MobileSidebar = () => {
       {/* القائمة الجانبية للجوال فقط */}
       {open && (
         <div className="xl:hidden lg:hidden fixed inset-0 bg-black bg-opacity-60 z-[10001] flex">
-          <div className="bg-gray-900 h-full w-72 shadow-3xl p-6 text-white flex flex-col 
-          justify-between relative rounded-r-2xl">
+          <div className="bg-gray-900 h-full w-56 shadow-3xl p-6 text-white flex flex-col justify-between 
+          relative rounded-r-2xl overflow-y-auto max-h-screen">
             {/* زر إغلاق */}
             <button
               className="absolute top-4 right-4 text-white bg-gray-800 rounded-full p-3 shadow-lg text-xl"
@@ -103,8 +103,8 @@ const MobileSidebar = () => {
                     <span className="ml-4 whitespace-nowrap">{userInfo.username}</span>
                   </button>
                   {dropdownOpen && (
-                    <div className="mt-2 w-64 bg-gray-800 text-white p-3 rounded-xl 
-                    shadow-xl z-50 flex flex-col space-y-2 max-h-96 overflow-y-auto">
+                    <div className="mt-2 w-52 bg-gray-800 text-white p-3 rounded-xl 
+                    shadow-xl z-50 flex flex-col space-y-2 overflow-y-auto">
                       {/* روابط الأدمن */}
                       {userInfo.isAdmin && (
                         <>

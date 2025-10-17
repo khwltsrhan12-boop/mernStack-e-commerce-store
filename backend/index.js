@@ -8,6 +8,7 @@ import categoryRoutes from './routes/categoryRoutes.js'
 import productRoutes from './routes/productRoutes.js'
 import uploadRoutes from './routes/uploadRoutes.js'
 import orderRoutes from './routes/orderRoutes.js'
+//import path from 'path';
 import cors from 'cors'
 
 
@@ -45,9 +46,8 @@ app.get("/api/config/paypal", (req, res) => {
   res.send({ clientId: process.env.PAYPAL_CLIENT_ID });
 });
 
-
-// const __dirname = path.resolve();
-// app.use('/uploads', express.static(path.join(__dirname, '/uploads'))); // تم التعليق: التخزين المحلي للصور
+//const __dirname = path.resolve();
+//app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
 
 
 app.listen(port , () => console.log(`Server running on port: ${port}`));

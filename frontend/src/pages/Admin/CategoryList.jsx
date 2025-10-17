@@ -36,7 +36,8 @@ const CategoryList = () => {
         toast.error(result.error);
       } else {
         setName("");
-        toast.success(`${result.name} is created.`);
+        const categoryName = result.name || result.category?.name || "Category";
+        toast.success(`${categoryName} is created.`);
       }
     } catch (error) {
       console.error(error);
@@ -63,7 +64,8 @@ const CategoryList = () => {
       if (result.error) {
         toast.error(result.error);
       } else {
-        toast.success(`${result.name} is updated`);
+        const categoryName = result.name || result.category?.name || "Category";
+        toast.success(`${categoryName} is updated`);
         setSelectedCategory(null);
         setUpdatingName("");
         setModalVisible(false);
@@ -80,7 +82,8 @@ const CategoryList = () => {
       if (result.error) {
         toast.error(result.error);
       } else {
-        toast.success(`${result.name} is deleted.`);
+        const categoryName = result.name || result.category?.name || "Category";
+        toast.success(`${categoryName} is deleted.`);
         setSelectedCategory(null);
         setModalVisible(false);
       }

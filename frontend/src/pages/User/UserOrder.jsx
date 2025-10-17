@@ -1,3 +1,4 @@
+import {getProductImageSrc} from "../Admin/OrderList";
 import Message from "../../components/Message";
 import Loader from "../../components/Loader";
 import { Link } from "react-router-dom";
@@ -42,7 +43,7 @@ const UserOrder = () => {
                      border-l-4 border-l-transparent hover:border-l-pink-500">
                     <td className="py-4 px-4 whitespace-nowrap">
                       <img
-                        src={order.orderItems[0].image}
+                        src={getProductImageSrc(order.orderItems[0]?.image)}
                         alt={order.user}
                         className="w-20 h-20 object-cover rounded-lg border-2 border-gray-600 
                         shadow-md hover:border-pink-500 transition-colors duration-200"
@@ -110,7 +111,7 @@ const UserOrder = () => {
             {orders.map((order) => (
               <div key={order._id} className="bg-gray-800 rounded-xl shadow-lg border border-gray-700 p-4">
                 <div className="flex gap-3 items-center mb-2">
-                  <img src={order.orderItems[0].image} alt={order.user} 
+                  <img src={getProductImageSrc(order.orderItems[0]?.image)} alt={order.user} 
                   className="w-16 h-16 object-cover rounded-lg border-2 border-gray-600 shadow-md" />
                   <div>
                     <div className="text-xs text-gray-400 font-mono">{order._id.substring(0, 10)}...</div>
